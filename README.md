@@ -2,7 +2,8 @@
 
 ## Docker
 ```
-docker-compose up -d --build
+docker-compose build [--build-arg SA_PASSWORD=<password>]   # default password: P@ssw0rd!
+docker-compose up -d
 ```
 
 ## mssql-cli
