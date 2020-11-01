@@ -11,7 +11,8 @@ brew cask install docker-edge
 ```
 brew install pyenv
 pyenv install
-python -V           # Python 3.8.2
+python -V                   # Python 3.8.2
+pip install --upgrade pip
 ```
 
 ## Docker
