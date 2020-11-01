@@ -30,16 +30,19 @@ mssql-cli -S localhost -U SA -P <password>
 ## Docker for MacのTCPポート(2375)をListenする方法
 - Server
 ```
-brew install socat
-socat -d TCP-LISTEN:2375,range=192.168.1.0/24,reuseaddr,fork UNIX:/var/run/docker.sock
+docker run -d --restart=always \
+    -p 2376:2375 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    alpine/socat \
+    tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
 ```
 
 - Client
 ```
-docker -H tcp://<host>:2375 ...
+docker -H tcp://<host>:2376 ...
 
 OR
 
-docker context create <name> --docker host=tcp://<host>:2375
+docker context create <name> --docker host=tcp://<host>:2376
 docker context use <name>   # OR export DOCkER_CONTEXT=<name>
 ```
